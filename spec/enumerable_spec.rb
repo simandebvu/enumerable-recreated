@@ -59,4 +59,18 @@ describe Enumerable do
             expect([].my_all?).to eql(true)
         end
     end
+    describe "#my_any" do 
+        it "Must return true if no block or parameters given." do
+            expect(arr.my_any?).to eql(arr.any?)
+        end
+        it "Must return true if given relevant class parameter." do
+            expect(arr.my_any?(Integer)).to eql(true)
+        end
+        it "Must return true if given empty arguments." do
+            expect(arr.my_any?()).to eql(arr.any?)
+        end
+        it "Must return false if given non qualifying regex." do
+            expect(arr.my_any?(/x/)).not_to eql(true)
+        end
+    end
 end
