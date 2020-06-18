@@ -72,5 +72,22 @@ describe Enumerable do
         it "Must return false if given non qualifying regex." do
             expect(arr.my_any?(/x/)).not_to eql(true)
         end
+        it "Must return relevant result if block given." do
+            expect(arr.my_any? { |i| (i % 2).zero? }).to eql(arr.any? { |i| (i % 2).zero? })
+        end
+    end
+    describe "#my_none" do
+        it "Must return the correct result if block given." do
+            expect(arr.my_none? { |i| (i % 11).zero? }).to eql(arr.none? { |i| (i % 11).zero? })
+        end
+        it "Must return true if given relevant class parameter." do
+            expect(arr.my_none?(String)).to eql(true)
+        end
+        it "Must return true if given an empty array." do
+            expect([].my_none?).to eql(true)
+        end
+        it "Must return true if none of the elements matches the regex." do
+            expect(arr.my_none?(2)).not_to eq(true)
+        end
     end
 end
