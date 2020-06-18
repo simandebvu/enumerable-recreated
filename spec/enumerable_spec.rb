@@ -127,6 +127,9 @@ describe Enumerable do
             expect((15..25).my_inject(5) {|i, j| i*j}).to eql(889625721600000)
         end
     end
-
-
+    describe "#multiply_else" do
+        it "Must correctly mulitply elements using #my_inject" do
+            expect(multiply_els([2, 4, 5])).to eql(40)
+        end
+    end
 end
