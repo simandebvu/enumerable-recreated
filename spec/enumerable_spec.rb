@@ -108,8 +108,25 @@ describe Enumerable do
         it "Must return the correct result if passed a block." do 
             expect(arr.my_map{ |item| item * 2 }).to eql(arr.map{ |item| item * 2 })
         end
-        it "Must return an array of classes of each element when passed &:class" do
+        it "Must return an array of classes of each element when passed &:class." do
             expect(arr.my_map(&:class)).to eq([Integer, Integer, Integer, Integer, Integer])
+        end
+        it "Must not mutate the original array." do 
+            arr.my_map{ |item| item * 2 }
+            expect(arr).to eql([1,2,3,4,5])
         end     
     end
+    describe "#my_inject" do
+        it "Must produce the correct output when given a symbol." do 
+            expect(arr.my_inject(:+)).to eql(arr.inject(:+))
+        end
+        it "Must raise LocalJumpError if no block is given." do
+            expect{arr.my_inject}.to raise_error(LocalJumpError)
+        end
+        it "Must return the correct result as inject when given a block." do
+            expect((15..25).my_inject(5) {|i, j| i*j}).to eql(889625721600000)
+        end
+    end
+
+
 end
