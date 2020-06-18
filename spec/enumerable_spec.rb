@@ -90,4 +90,15 @@ describe Enumerable do
             expect(arr.my_none?(2)).not_to eq(true)
         end
     end
+    describe "#my_count" do
+        it "Must correctly give the correct number of elements on count." do
+            expect(arr.my_count).to eql(arr.count)
+        end
+        it "Must return the correct result is passed an argument." do
+            expect(arr.my_count(99)).to eql(0)
+        end
+        it "Must return the correct result if passed a block." do 
+            expect(arr.my_count{|i| i>2}).to eql(3)
+        end
+    end
 end
