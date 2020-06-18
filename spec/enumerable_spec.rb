@@ -101,4 +101,15 @@ describe Enumerable do
             expect(arr.my_count{|i| i>2}).to eql(3)
         end
     end
+    describe "#my_map" do
+        it "Must return enum if no block given." do
+            expect(arr.my_map).to be_a(Enumerator)
+        end  
+        it "Must return the correct result if passed a block." do 
+            expect(arr.my_map{ |item| item * 2 }).to eql(arr.map{ |item| item * 2 })
+        end
+        it "Must return an array of classes of each element when passed &:class" do
+            expect(arr.my_map(&:class)).to eq([Integer, Integer, Integer, Integer, Integer])
+        end     
+    end
 end
