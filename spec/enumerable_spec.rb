@@ -28,7 +28,7 @@ describe Enumerable do
             expect(arr.my_each_with_index{|i, v| puts "Index #{i} => value #{v}"}).to eql(arr.each_with_index{|i, v| puts "Index #{i} => value #{v}"})
         end
     end
-    describe "my_select" do 
+    describe "#my_select" do 
         it "Must return enum if no block given." do
             expect(arr.my_select).to be_a(Enumerator)
         end
@@ -43,6 +43,20 @@ describe Enumerable do
         end
         it "Must return an empty array. If no matches found." do
             expect(arr.my_select{ |i| i > 50 }).to eql([])
+        end
+    end
+    describe "#my_all" do
+        it "Must return true if given relevant class parameter." do
+            expect(arr.my_all?(Integer)).to eql(true)
+        end
+        it "Must return false if given relevant regex parameter." do
+            expect(arr.my_all?(/d/)).to eql(false)
+        end
+        it "Must return relevant result if given relevant block parameter." do
+            expect(arr.my_all?{|i| i > 0}).to eql(true)
+        end
+        it "Must return true if given an empty array." do
+            expect([].my_all?).to eql(true)
         end
     end
 end
