@@ -28,4 +28,21 @@ describe Enumerable do
             expect(arr.my_each_with_index{|i, v| puts "Index #{i} => value #{v}"}).to eql(arr.each_with_index{|i, v| puts "Index #{i} => value #{v}"})
         end
     end
+    describe "my_select" do 
+        it "Must return enum if no block given." do
+            expect(arr.my_select).to be_a(Enumerator)
+        end
+        it "Must return the correct output if given block." do 
+            expect(arr.my_select{|i| i > 2}).to eql(arr.select{|i| i > 2})
+        end
+        it "Must throw argument error if given arguments ()." do 
+            expect{arr.my_select(9)}.to raise_error(ArgumentError)
+        end
+        it "Must return an array. If matches found." do
+            expect(arr.my_select(&:even?)).to be_an(Array)
+        end
+        it "Must return an empty array. If no matches found." do
+            expect(arr.my_select{ |i| i > 50 }).to eql([])
+        end
+    end
 end
